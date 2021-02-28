@@ -1,11 +1,12 @@
 import React from "react"
+import Lolly from "../components/Lolly"
 //@ts-ignore
-import lolly from '../svg/lolly.svg'
+
 
 export default function Home() {
   return (
   <div>Hello world!
-    <img src={lolly} />
+    <Lolly />
   </div>
   )
 }
