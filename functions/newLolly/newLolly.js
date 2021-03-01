@@ -6,7 +6,8 @@ const dotenv = require('dotenv').config();
 
 const typeDefs = gql`
   type Query {
-    hello: String
+    getLollyByUrl(path: String!) : Lolly
+    getAllLolly: [Lolly!]
   }
   type Lolly {
     recepientName: String!
@@ -19,6 +20,7 @@ const typeDefs = gql`
   }
   type Mutation {
     createLolly(
+      lollyPath: String!
       recepientName: String!
       message: String!
       from: String!
@@ -31,31 +33,39 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    hello: () => "Hello, world!",
+    getLollyByUrl: async (_ , {path}) => {
+      try {
+        var client = new faunadb.Client({
+          secret: process.env.FAUNADB_SECRET
+        })
+
+        var result = await client.query(
+          q.Get(q.Match(q.Index('lolly_by_path')))
+        )
+
+        return result.data
+
+      } catch (error) {
+        console.log('err' , error);
+      }
+    }
   },
   Mutation : {
     createLolly: async (_, args) => {
 
-      console.log('args: ',args);
-
-      // const client = new faunadb.Client({
-      //   secret: process.env.FAUNADB_SECRET
-      // })
-
-      // const id = shortid.generate();
-
-      // args.lollyPath = id;
-
-      // const result = await client.query(
-      //   q.Create(q.Collection('lollies') , {
-      //     data: args
-      //   })
-      // )
-      // console.log(result);
+      const client = new faunadb.Client({
+        secret: process.env.FAUNADB_SECRET
+      })
+      const result = await client.query(
+        q.Create(q.Collection('lollies') , {
+          data: args
+        })
+      )
+      console.log(result.data);
 
 
 
-      // return result.data
+      return result.data
     }
   }
 }
