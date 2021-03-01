@@ -11,6 +11,15 @@ const createNew = () => {
     const [message,setMessage] = useState('')
     const [from,setFrom] = useState('')
 
+
+    const freezeLolly = () => {
+        
+
+        setRecepient('')
+        setMessage('')
+        setFrom('')
+    }
+
     return (
         <div className='container'>
            <Header />
@@ -39,18 +48,30 @@ const createNew = () => {
                <div className='form' > 
                    <label htmlFor="recepientName">
                        To:<br/>
-                       <input  className="inputField text" type="text" name="recepientName" id="recepientName"/>
+                       <input value={recepient} onChange={(e)=>{
+                           setRecepient(e.target.value)
+                       }} className="inputField text" type="text" name="recepientName" id="recepientName"/>
                    </label>
                    <label htmlFor="message">
                        Message: <br/>
-                       <textarea className="inputField" name="message" id="" cols={30} rows={10}></textarea>
+                       <textarea onChange={
+                           (e) => {
+                               setMessage(e.target.value)
+                           }
+                       } className="inputField" name="message" id="" cols={30} rows={10}></textarea>
                    </label>
                    <label htmlFor="from">
                        From <br/>
-                       <input className="inputField text" type="text" name="from" id="from"/>
+                       <input onChange={(e)=>{
+                           setFrom(e.target.value)
+                       }} className="inputField text" type="text" name="from" id="from"/>
                    </label>
                </div>
-               <button className='freeze-btn' >Freeze Lolly and get link</button>
+               <button className='freeze-btn' onClick={
+                   ()=>{
+                       freezeLolly()
+                   }
+               } >Freeze Lolly and get link</button>
            </div> 
            </div>
         </div>
