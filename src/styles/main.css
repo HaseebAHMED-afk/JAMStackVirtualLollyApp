@@ -33,15 +33,17 @@
     color: white;
     font-family: 'Cedarville Cursive', cursive;
     font-size: 7.5ch;
+    text-shadow: 0 0 6px #fa73d9;
 }
 
 .header-para{
     color: white;
     font-family: 'Dancing Script', cursive;
     font-size: 3ch;
+    text-shadow: 0 0 6px #fa73d9;
 }
 
-.navigate-btn{
+.navigate-btn,.freeze-btn{
     margin: 50px;
     width: 250px;
     height: 50px;
@@ -55,11 +57,11 @@
     font-size: 3ch;
 }
 
-.navigate-btn:focus{
+.navigate-btn:focus,.freeze-btn:focus {
     outline: none;
 }
 
-.navigate-btn:hover{
+.navigate-btn:hover, .freeze-btn:hover{
     background-color: white;
     color:rgb(20, 20, 26) ;
 }
@@ -94,6 +96,30 @@
     display: flex;
     flex-direction: column;
 }
+
+.form{
+    display: flex;
+    flex-direction: column;
+    border: 1px white solid;
+    padding: 15px;
+    text-align: left;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #fa73d9;
+}
+
+.inputField{
+    margin: 15px 0;
+    color: white;
+    border: 1px solid #fa73d9;
+    width: 100%;
+    box-shadow: 0 0 6px #fa73d9;
+}
+.text{
+    height: 25px;
+}
+
+
 
 /* colgroup{
     color: #0066ff;

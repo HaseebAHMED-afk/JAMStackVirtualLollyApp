@@ -22,8 +22,22 @@ const createNew = () => {
                </label>
            </div>
            <div>
-               form
-           </div>
+               <div className='form' > 
+                   <label htmlFor="recepientName">
+                       To:<br/>
+                       <input  className="inputField text" type="text" name="recepientName" id="recepientName"/>
+                   </label>
+                   <label htmlFor="message">
+                       Message: <br/>
+                       <textarea className="inputField" name="message" id="" cols={30} rows={10}></textarea>
+                   </label>
+                   <label htmlFor="from">
+                       From <br/>
+                       <input className="inputField text" type="text" name="from" id="from"/>
+                   </label>
+               </div>
+               <button className='freeze-btn' >Freeze Lolly and get link</button>
+           </div> 
            </div>
         </div>
     )
