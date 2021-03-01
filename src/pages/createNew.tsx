@@ -1,24 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../components/Header'
 import Lolly from '../components/Lolly'
 
 const createNew = () => {
+
+    const [color1 , setColor1] = useState('#ff0000')
+    const [color2 , setColor2] = useState('#00ff0d')
+    const [color3 , setColor3] = useState('#0066ff')
+    const [recepient,setRecepient] = useState('')
+    const [message,setMessage] = useState('')
+    const [from,setFrom] = useState('')
+
     return (
         <div className='container'>
            <Header />
            <div className="lolli-form">
            <div>
-               <Lolly lolyTop='red'  lolyMiddle='green' lolyBottom='blue'  />
+               <Lolly lolyTop={color1}  lolyMiddle={color2} lolyBottom={color3}  />
            </div>
            <div className='color-pallete' >
                <label htmlFor="flavor-top" className="colorLabel">
-               <input type='color' className='color-picker' value='#ff0000' name='flavor-top' id='flavor-top'/>
+               <input onChange={ (e) =>{
+                   setColor1(e.target.value)
+               }} type='color' className='color-picker' value={color1} name='flavor-top' id='flavor-top'/>
                </label>
                <label htmlFor="flavor-middle" className="colorLabel">
-               <input type='color' className='color-picker' value='#00ff0d' name='flavor-middle' id='flavor-top'/>
+               <input onChange={(e)=>{
+                   setColor2(e.target.value)
+               }} type='color' className='color-picker' value={color2} name='flavor-middle' id='flavor-top'/>
                </label>
                <label htmlFor="flavor-bottom" className="colorLabel">
-               <input type='color' className='color-picker' value='#0066ff' name='flavor-bottom' id='flavor-top'/>
+               <input onChange={(e)=>{
+                   setColor3(e.target.value)
+               }} type='color' className='color-picker' value={color3} name='flavor-bottom' id='flavor-top'/>
                </label>
            </div>
            <div>
