@@ -1,7 +1,8 @@
-const { ApolloServer, gql } = require("apollo-server-lambda")
+const { ApolloServer, gql } = require("apollo-server-lambda");
 const faunadb = require('faunadb');
 const q = faunadb.query
-const shortId = require('shortid')
+const shortid = require('shortid');
+const dotenv = require('dotenv').congig();
 
 const typeDefs = gql`
   type Query {
@@ -16,7 +17,7 @@ const typeDefs = gql`
     flavorBottom: String!
     lollyPath: String!
   }
-  type Mutations {
+  type Mutation {
     createLolly(
       recepientName: String!
       message: String!
@@ -31,18 +32,28 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: () => "Hello, world!",
-    authorByName: (root, args) => {
-      console.log("hihhihi", args.name)
-      return authors.find(author => author.name === args.name) || "NOTFOUND"
-    },
   },
   Mutation : {
     createLolly: (_, args) => {
-      console.log(args.name);
 
-      return {
-        message: 'Hello'
-      }
+      const client = new faunadb.Client({
+        secret: process.env.FAUNADB_SECRET
+      })
+
+      const id = shortid.generate();
+
+      args.lollyPath = id;
+
+      const result = await client.query(
+        q.Create(q.Collection('lollies') , {
+          data: args
+        })
+      )
+      console.log(result);
+
+
+
+      return result.data
     }
   }
 }
