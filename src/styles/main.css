@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(20, 20, 26);
+}
+
+.container{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+}
+
+.listLollies{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.listLollies .lollipop{
+    height: 300px;
+}
+
+.header{
+    text-align: center;
+    margin: 100px auto;
+}
+
+.header-h1{
+    color: white;
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: 7.5ch;
+}
+
+.header-para{
+    color: white;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3ch;
+}
+
+.navigate-btn{
+    margin: 50px;
+    width: 250px;
+    height: 50px;
+    background-color: transparent;
+    color: white;
+    border-radius: 50px;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3ch;
+}
+
+.navigate-btn:focus{
+    outline: none;
+}
+
+.navigate-btn:hover{
+    background-color: white;
+    color:rgb(20, 20, 26) ;
+}
