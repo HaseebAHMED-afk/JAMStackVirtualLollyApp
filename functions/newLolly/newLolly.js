@@ -2,7 +2,7 @@ const { ApolloServer, gql } = require("apollo-server-lambda");
 const faunadb = require('faunadb');
 const q = faunadb.query
 const shortid = require('shortid');
-const dotenv = require('dotenv').congig();
+const dotenv = require('dotenv').config();
 
 const typeDefs = gql`
   type Query {
@@ -34,26 +34,28 @@ const resolvers = {
     hello: () => "Hello, world!",
   },
   Mutation : {
-    createLolly: (_, args) => {
+    createLolly: async (_, args) => {
 
-      const client = new faunadb.Client({
-        secret: process.env.FAUNADB_SECRET
-      })
+      console.log('args: ',args);
 
-      const id = shortid.generate();
+      // const client = new faunadb.Client({
+      //   secret: process.env.FAUNADB_SECRET
+      // })
 
-      args.lollyPath = id;
+      // const id = shortid.generate();
 
-      const result = await client.query(
-        q.Create(q.Collection('lollies') , {
-          data: args
-        })
-      )
-      console.log(result);
+      // args.lollyPath = id;
+
+      // const result = await client.query(
+      //   q.Create(q.Collection('lollies') , {
+      //     data: args
+      //   })
+      // )
+      // console.log(result);
 
 
 
-      return result.data
+      // return result.data
     }
   }
 }

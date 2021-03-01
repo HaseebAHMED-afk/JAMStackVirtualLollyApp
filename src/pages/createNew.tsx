@@ -1,6 +1,23 @@
+import { gql, useMutation, useQuery } from '@apollo/client'
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import Lolly from '../components/Lolly'
+
+
+const GET_DATA = gql`
+    {
+        hello
+    }
+`
+
+const CREATE_LOLLY = gql`
+    mutation createLolly($recepientName: String!,$message: String!,$from: String!,$flavorTop: String!,$flavorMiddle: String!,$flavorBottom: String!){
+          createLolly(recepientName: $recepientName,message: $message,from: $from,flavorTop: $flavorTop,flavorMiddle: $flavorMiddle,flavorBottom: $flavorBottom){
+            message,
+            lollyPath
+      }
+      }
+`
 
 const createNew = () => {
 
@@ -11,10 +28,25 @@ const createNew = () => {
     const [message,setMessage] = useState('')
     const [from,setFrom] = useState('')
 
+    const {loading, error , data} = useQuery(GET_DATA)
+    const [createLolly] = useMutation(CREATE_LOLLY)
 
-    const freezeLolly = () => {
+    const freezeLolly = async () => {
+
         
-
+        
+       const result = await createLolly({
+            variables:{
+                recepientName: recepient,
+                message: message,
+                from: from,
+                flavorTop: color1,
+                flavorMiddle: color2,
+                flavorBottom: color3
+            }
+        })
+        console.log(result);
+        
         setRecepient('')
         setMessage('')
         setFrom('')
