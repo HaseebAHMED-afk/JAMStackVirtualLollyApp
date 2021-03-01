@@ -1,7 +1,7 @@
 import { func } from "prop-types"
 import React from "react"
 
-export default function Lolly() {
+export default function Lolly({lolyTop, lolyMiddle , lolyBottom}) {
   return (
       <svg
         className="lollipop"
@@ -64,13 +64,13 @@ export default function Lolly() {
             </mask>
             <use
               className="lollyBottom"
-              fill="#deaa43"
+              fill={lolyBottom}
               fillRule="nonzero"
               href="#path-1"
             ></use>
             <rect
               className="lollyTop"
-              fill="#d52358"
+              fill={lolyTop}
               fillRule="nonzero"
               mask="url(#mask-2)"
               x="-25"
@@ -80,7 +80,7 @@ export default function Lolly() {
             ></rect>
             <rect
               className="lollyMiddle"
-              fill="#e95946"
+              fill={lolyMiddle}
               fillRule="nonzero"
               mask="url(#mask-2)"
               x="-29"
