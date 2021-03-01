@@ -20,7 +20,7 @@
 }
 
 
-.listLollies .lollipop{
+.listLollies .lollipop .lolli-form{
     height: 300px;
 }
 
@@ -63,3 +63,38 @@
     background-color: white;
     color:rgb(20, 20, 26) ;
 }
+.lolli-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.colorLabel{
+    height: 40px;
+    width: 40px;
+    border-radius: 24px;
+    border: 2px solid #fff;
+    display: block;
+    overflow: hidden;
+    margin: 30px;
+    box-shadow: 0 0 14px #000;
+}
+
+.color-picker{
+    width: 60px;
+    height: 60px;
+    margin-top: -10px;
+    margin-left: -10px;
+    padding: 0;
+    appearance: auto;
+    cursor: pointer;
+}
+.color-pallete{
+    display: flex;
+    flex-direction: column;
+}
+
+/* colgroup{
+    color: #0066ff;
+} */
