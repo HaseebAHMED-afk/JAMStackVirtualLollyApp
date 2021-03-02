@@ -3,24 +3,8 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import Lolly from '../components/Lolly'
 import {nanoid} from 'nanoid'
-import { navigateTo } from 'gatsby'
+import { navigate } from 'gatsby'
 
-
-// const GET_LOLLY = gql`
-//     {
-//         query getLolly($path: String!){
-//             getLollyByUrl(path: $path){
-//                 lollyPath
-//                 recepientName
-//                 message
-//                 from
-//                 flavorTop
-//                 flavorMiddle
-//                 flavorBottom
-//             }
-//         }
-//     }
-// `
 
 const CREATE_LOLLY = gql`
     mutation createLolly($recepientName: String!,$message: String!,$from: String!,$flavorTop: String!,$flavorMiddle: String!,$flavorBottom: String!, $lollyPath:String!){
@@ -39,15 +23,14 @@ const createNew = () => {
     const [recepient,setRecepient] = useState('')
     const [message,setMessage] = useState('')
     const [from,setFrom] = useState('')
-    const [link , setLink] = useState(``)
+    
 
     // const {loading, error , data} = useQuery(GET_DATA)
     const [createLolly] = useMutation(CREATE_LOLLY)
 
     const freezeLolly = async () => {
 
-        // console.log(data);
-        setLink(`lollies/${nanoid(10)}`)
+        const link = nanoid(10);
         
        const result = await createLolly({
             variables:{
@@ -60,11 +43,15 @@ const createNew = () => {
                 lollyPath: link
             }
         })
+
+        console.log(result);
+        
         setRecepient('')
         setMessage('')
         setFrom('')
 
-        navigateTo('/lollies/newLolly')
+        navigate('/showLolly')
+
     }
 
     return (
@@ -97,7 +84,7 @@ const createNew = () => {
                        To:<br/>
                        <input value={recepient} onChange={(e)=>{
                            setRecepient(e.target.value)
-                       }} className="inputField text" type="text" name="recepientName" id="recepientName"/>
+                       }} className="inputField text" type="text" name="recepientName"  id="recepientName"/>
                    </label>
                    <label htmlFor="message">
                        Message: <br/>
@@ -105,13 +92,13 @@ const createNew = () => {
                            (e) => {
                                setMessage(e.target.value)
                            }
-                       } className="inputField" name="message" id="" cols={30} rows={10}></textarea>
+                       } className="inputField" name="message" id="" value={message} cols={30} rows={10}></textarea>
                    </label>
                    <label htmlFor="from">
                        From <br/>
                        <input onChange={(e)=>{
                            setFrom(e.target.value)
-                       }} className="inputField text" type="text" name="from" id="from"/>
+                       }} className="inputField text" type="text" value={from} name="from" id="from"/>
                    </label>
                </div>
                <button className='freeze-btn' onClick={

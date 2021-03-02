@@ -1,13 +1,11 @@
 const { ApolloServer, gql } = require("apollo-server-lambda");
-const faunadb = require('faunadb');
+const faunadb = require('faunadb')
 const q = faunadb.query
-const shortid = require('shortid');
 const dotenv = require('dotenv').config();
 
 const typeDefs = gql`
   type Query {
     getLollyByUrl(path: String!) : Lolly
-    getAllLolly: [Lolly!]
   }
   type Lolly {
     recepientName: String!
