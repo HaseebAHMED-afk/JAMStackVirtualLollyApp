@@ -149,7 +149,24 @@
     font-size: 3ch;
     text-shadow: 0 0 6px #fa73d9;
 }
+.to{
+    font-size: 5ch;
+}
 
+.link-to{
+    color: white;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3ch;
+    text-shadow: 0 0 6px #fa73d9;
+}
+.link{
+    background-color: black;
+    color: white;
+    box-shadow: 5px 5px 5px 5px black;
+    text-align: center;
+    align-items: center;
+    font-family: 'Dancing Script', cursive;
+}
 /* colgroup{
     color: #0066ff;
 } */

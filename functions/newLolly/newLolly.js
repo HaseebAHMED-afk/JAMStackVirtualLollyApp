@@ -38,7 +38,7 @@ const resolvers = {
         })
 
         var result = await client.query(
-          q.Get(q.Match(q.Index('lolly_by_path')))
+          q.Get(q.Match(q.Index('lolli_by_url'), path))
         )
 
         return result.data

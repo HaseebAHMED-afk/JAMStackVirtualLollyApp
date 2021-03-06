@@ -50,7 +50,9 @@ const createNew = () => {
         setMessage('')
         setFrom('')
 
-        navigate('/showLolly')
+        navigate('/showLolly',{state: {
+            path: link
+        }})
 
     }
 
