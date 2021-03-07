@@ -39,7 +39,7 @@ const ShowLolly:FC<types> =  ({ link }) => {
                 <div>
                 <p className="to">{data.getLollyByUrl.from} sent you a lolly!!</p>
                 <p className="link-to">Share it with this link</p>
-                <p className="link" >{data.getLollyByUrl.lollyPath}</p>
+                <p className="link" >{`https://virtual-lollybyhaseebahmed.netlify.app/lolly/${data.getLollyByUrl.lollyPath}`}</p>
                 <div className="lolly-container">
                   <p className="msg">{data.getLollyByUrl.recepientName}</p>
                   <p className="msg">{data.getLollyByUrl.message}</p>

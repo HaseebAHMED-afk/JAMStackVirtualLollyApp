@@ -4,32 +4,29 @@ import Lolly from "../components/Lolly";
 import "../styles/main.css";
 
 const Template = ({ pageContext: { data } }) => {
+
+  console.log(data);
+  
   return (
-    <div className="createLolly">
-      {/* <Lolly
-        lollyTop={data.colorTop}
-        lollyMiddle={data.colorMiddle}
-        lollyBottom={data.colorBottom}
-      /> */}
-      <div className="info">
-        <div className="details">
-          <p id="recipient" className="recipient">
-            {data.recipient}
-          </p>
-          <div id="message" className="message">
-            {data.message}
-          </div>
-          <p id="from" className="from">
-            — {data.sender}
-          </p>
-        </div>
-        <p className="bytheway">
-          {data.sender}
-          made this virtual lollipop for you. You can
-          <Link to="/createLolly">make your own</Link> to send to a friend who
-          deserve some sugary treat which won't rot their teeth...
-        </p>
-      </div>
+    <div >
+        {
+            data && (
+                <div className="show-lolly">
+                <Lolly lolyTop={data.flavorTop} lolyBottom={data.flavorBottom} lolyMiddle={data.flavorMiddle} />
+                <div>
+                <p className="to">{data.from} sent you a lolly!!</p>
+                <p className="link-to">Share it with this link</p>
+                <p className="link" >{`https://virtual-lollybyhaseebahmed.netlify.app/lolly/${data.lollyPath}`}</p>
+                <div className="lolly-container">
+                  <p className="msg">{data.recepientName}</p>
+                  <p className="msg">{data.message}</p>
+                  <p className="from">~{data.from}</p>
+                </div>
+                </div>
+               
+                </div>
+            )
+        }
     </div>
   );
 };
