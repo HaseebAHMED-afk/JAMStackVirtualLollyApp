@@ -37,6 +37,7 @@ const ShowLolly:FC<types> =  ({ link }) => {
                 <div className="show-lolly">
                 <Lolly lolyTop={data.getLollyByUrl.flavorTop} lolyBottom={data.getLollyByUrl.flavorBottom} lolyMiddle={data.getLollyByUrl.flavorMiddle} />
                 <div>
+                <p className="to">Freezing will take two minutes!!!!!</p>
                 <p className="to">{data.getLollyByUrl.from} sent you a lolly!!</p>
                 <p className="link-to">Share it with this link</p>
                 <p className="link" >{`https://virtual-lollybyhaseebahmed.netlify.app/lolly/${data.getLollyByUrl.lollyPath}`}</p>
