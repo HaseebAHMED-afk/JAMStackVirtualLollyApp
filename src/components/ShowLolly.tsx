@@ -1,6 +1,10 @@
-import React from "react"
-import Lolly from "../components/Lolly"
+import React, {FC} from "react"
+import Lolly from './Lolly'
 import { gql, useQuery } from "@apollo/client"
+
+interface types {
+  link : string
+}
 
 const getLolly = gql`
   query getLollyByUrl($path: String!) {
@@ -16,17 +20,15 @@ const getLolly = gql`
   }
 `
 
-const showLolly =  ({ location }) => {
+const ShowLolly:FC<types> =  ({ link }) => {
+
+
+    
   const { data } = useQuery(getLolly, {
     variables: {
-      path: location.state.path,
+      path: link,
     },
   })
-
-
-
-  
-
 
   return (
     <div >
@@ -52,4 +54,4 @@ const showLolly =  ({ location }) => {
   )
 }
 
-export default showLolly
+export default ShowLolly

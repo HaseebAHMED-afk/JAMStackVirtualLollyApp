@@ -59,7 +59,6 @@ const resolvers = {
           data: args
         })
       )
-      console.log(result.data);
 
 
 

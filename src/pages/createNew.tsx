@@ -1,9 +1,10 @@
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery , useLazyQuery } from '@apollo/client'
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import Lolly from '../components/Lolly'
 import {nanoid} from 'nanoid'
 import { navigate } from 'gatsby'
+import ShowLolly from '../components/ShowLolly'
 
 
 const CREATE_LOLLY = gql`
@@ -15,6 +16,7 @@ const CREATE_LOLLY = gql`
       }
 `
 
+
 const createNew = () => {
 
     const [color1 , setColor1] = useState('#ff0000')
@@ -23,15 +25,17 @@ const createNew = () => {
     const [recepient,setRecepient] = useState('')
     const [message,setMessage] = useState('')
     const [from,setFrom] = useState('')
+    const [link] = useState(nanoid(10))
+    const [submit , setSubmit] = useState(false)
     
 
-    // const {loading, error , data} = useQuery(GET_DATA)
     const [createLolly] = useMutation(CREATE_LOLLY)
 
-    const freezeLolly = async () => {
+    
+    
 
-        const link = nanoid(10);
-        
+    const freezeLolly = async () => {
+                
        const result = await createLolly({
             variables:{
                 recepientName: recepient,
@@ -44,73 +48,85 @@ const createNew = () => {
             }
         })
 
-        console.log(result);
+        
         
         setRecepient('')
         setMessage('')
         setFrom('')
 
-        navigate('/showLolly',{state: {
-            path: link
-        }})
-
+        setSubmit(true)
+    
     }
 
+    
+
+
     return (
-        <div className='container'>
-           <Header />
-           <div className="lolli-form">
-           <div>
-               <Lolly lolyTop={color1}  lolyMiddle={color2} lolyBottom={color3}  />
-           </div>
-           <div className='color-pallete' >
-               <label htmlFor="flavor-top" className="colorLabel">
-               <input onChange={ (e) =>{
-                   setColor1(e.target.value)
-               }} type='color' className='color-picker' value={color1} name='flavor-top' id='flavor-top'/>
-               </label>
-               <label htmlFor="flavor-middle" className="colorLabel">
-               <input onChange={(e)=>{
-                   setColor2(e.target.value)
-               }} type='color' className='color-picker' value={color2} name='flavor-middle' id='flavor-top'/>
-               </label>
-               <label htmlFor="flavor-bottom" className="colorLabel">
-               <input onChange={(e)=>{
-                   setColor3(e.target.value)
-               }} type='color' className='color-picker' value={color3} name='flavor-bottom' id='flavor-top'/>
-               </label>
-           </div>
-           <div>
-               <div className='form' > 
-                   <label htmlFor="recepientName">
-                       To:<br/>
-                       <input value={recepient} onChange={(e)=>{
-                           setRecepient(e.target.value)
-                       }} className="inputField text" type="text" name="recepientName"  id="recepientName"/>
-                   </label>
-                   <label htmlFor="message">
-                       Message: <br/>
-                       <textarea onChange={
-                           (e) => {
-                               setMessage(e.target.value)
-                           }
-                       } className="inputField" name="message" id="" value={message} cols={30} rows={10}></textarea>
-                   </label>
-                   <label htmlFor="from">
-                       From <br/>
-                       <input onChange={(e)=>{
-                           setFrom(e.target.value)
-                       }} className="inputField text" type="text" value={from} name="from" id="from"/>
-                   </label>
-               </div>
-               <button className='freeze-btn' onClick={
-                   ()=>{
-                       freezeLolly()
-                   }
-               } >Freeze Lolly and get link</button>
-           </div> 
-           </div>
+        <div>
+            {
+                submit === false ? (
+                    <div className='container'>
+                    <Header />
+                    <div className="lolli-form">
+                    <div>
+                        <Lolly lolyTop={color1}  lolyMiddle={color2} lolyBottom={color3}  />
+                    </div>
+                    <div className='color-pallete' >
+                        <label htmlFor="flavor-top" className="colorLabel">
+                        <input onChange={ (e) =>{
+                            setColor1(e.target.value)
+                        }} type='color' className='color-picker' value={color1} name='flavor-top' id='flavor-top'/>
+                        </label>
+                        <label htmlFor="flavor-middle" className="colorLabel">
+                        <input onChange={(e)=>{
+                            setColor2(e.target.value)
+                        }} type='color' className='color-picker' value={color2} name='flavor-middle' id='flavor-top'/>
+                        </label>
+                        <label htmlFor="flavor-bottom" className="colorLabel">
+                        <input onChange={(e)=>{
+                            setColor3(e.target.value)
+                        }} type='color' className='color-picker' value={color3} name='flavor-bottom' id='flavor-top'/>
+                        </label>
+                    </div>
+                    <div>
+                        <div className='form' > 
+                            <label htmlFor="recepientName">
+                                To:<br/>
+                                <input value={recepient} onChange={(e)=>{
+                                    setRecepient(e.target.value)
+                                }} className="inputField text" type="text" name="recepientName"  id="recepientName"/>
+                            </label>
+                            <label htmlFor="message">
+                                Message: <br/>
+                                <textarea onChange={
+                                    (e) => {
+                                        setMessage(e.target.value)
+                                    }
+                                } className="inputField" name="message" id="" value={message} cols={30} rows={10}></textarea>
+                            </label>
+                            <label htmlFor="from">
+                                From <br/>
+                                <input onChange={(e)=>{
+                                    setFrom(e.target.value)
+                                }} className="inputField text" type="text" value={from} name="from" id="from"/>
+                            </label>
+                        </div>
+                        <button className='freeze-btn' onClick={
+                            ()=>{
+                                freezeLolly()
+                            }
+                        } >Freeze Lolly and get link</button>
+                    </div> 
+                    </div>
+                 </div>
+                ) :
+                (
+                   <ShowLolly link={link} />
+                )
+            }
         </div>
+        
+       
     )
 }
 
